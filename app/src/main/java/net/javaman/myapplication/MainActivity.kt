@@ -11,6 +11,7 @@ import android.hardware.camera2.CameraCaptureSession
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
+import android.media.CamcorderProfile
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -101,6 +102,8 @@ class MainActivity : AppCompatActivity() {
             // for ActivityCompat#requestPermissions for more details.
             return
         }
+        var cameraCharacteristics = cameraManager.getCameraCharacteristics(firstCamera)
+        var camProfile = CamcorderProfile.get(firstCamera.toInt(),CamcorderProfile.QUALITY_HIGH)
         cameraManager.openCamera(firstCamera, object : CameraDevice.StateCallback() {
             override fun onDisconnected(p0: CameraDevice) {}
             override fun onError(p0: CameraDevice, p1: Int) {}
